@@ -20,7 +20,6 @@ let package = Package(
     // Dependencies declare other packages that this package depends on.
     .package(url: "https://github.com/indigo-stacks/http-request-builder", from: "1.2.0"),
     .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.11.0"),
-    .package(url: "https://github.com/kean/Pulse.git", from: "5.1.4"),
   ],
   targets: [
     // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -31,7 +30,6 @@ let package = Package(
         .product(name: "HTTPRequestBuilder", package: "http-request-builder"),
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
-        .product(name: "Pulse", package: "Pulse"),
       ]
     ),
     .testTarget(

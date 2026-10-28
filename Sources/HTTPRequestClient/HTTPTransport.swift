@@ -13,4 +13,12 @@ public protocol HTTPTransport: Sendable {
   func data(for request: URLRequest) async throws -> (Data, URLResponse)
 }
 
-extension URLSession: HTTPTransport {}
+extension URLSession: HTTPTransport {
+  #if canImport(FoundationNetworking)
+    // swift-corelibs-foundation only has `data(for:delegate:)`, which cannot
+    // witness the one-argument requirement.
+    public func data(for request: URLRequest) async throws -> (Data, URLResponse) {
+      try await data(for: request, delegate: nil)
+    }
+  #endif
+}

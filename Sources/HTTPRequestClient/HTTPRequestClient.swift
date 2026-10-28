@@ -2,7 +2,6 @@ import Dependencies
 import DependenciesMacros
 import Foundation
 import HTTPRequestBuilder
-import Pulse
 
 #if canImport(FoundationNetworking)
   import FoundationNetworking
@@ -13,14 +12,14 @@ public struct HTTPRequestClient: Sendable {
   public let send:
     @Sendable (
       URLRequest,
-      URLSessionProtocol
+      HTTPTransport
     ) async throws -> (Data, HTTPURLResponse, UUID)
 }
 
 extension HTTPRequestClient {
   public func send(
     _ request: URLRequest,
-    urlSession: URLSessionProtocol = URLSession.shared
+    urlSession: HTTPTransport = URLSession.shared
   ) async throws -> (Data, HTTPURLResponse, UUID) {
     try await send(request, urlSession)
   }
@@ -28,7 +27,7 @@ extension HTTPRequestClient {
   public func send(
     _ request: Request = .init(),
     baseURL: String,
-    urlSession: URLSessionProtocol = URLSession.shared,
+    urlSession: HTTPTransport = URLSession.shared,
     cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy,
     timeoutInterval: TimeInterval = 60,
     @RequestBuilder middleware: () -> RequestMiddleware = { identity }
@@ -46,7 +45,7 @@ extension HTTPRequestClient {
   public func send<T, ServerError>(
     _ request: URLRequest,
     decoder: JSONDecoder = .init(),
-    urlSession: URLSessionProtocol = URLSession.shared
+    urlSession: HTTPTransport = URLSession.shared
   ) async throws -> Response<T, ServerError>
   where
     T: Decodable,
@@ -106,7 +105,7 @@ extension HTTPRequestClient {
   public func send<T>(
     _ request: URLRequest,
     decoder: JSONDecoder = .init(),
-    urlSession: URLSessionProtocol = URLSession.shared
+    urlSession: HTTPTransport = URLSession.shared
   ) async throws -> SuccessResponse<T>
   where T: Decodable {
     let (data, response, requestID) = try await send(
@@ -155,7 +154,7 @@ extension HTTPRequestClient {
     _ request: Request = .init(),
     decoder: JSONDecoder = .init(),
     baseURL: String,
-    urlSession: URLSessionProtocol = URLSession.shared,
+    urlSession: HTTPTransport = URLSession.shared,
     cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy,
     timeoutInterval: TimeInterval = 60,
     @RequestBuilder middleware: () -> RequestMiddleware = { identity }
@@ -179,7 +178,7 @@ extension HTTPRequestClient {
     _ request: Request = .init(),
     baseURL: String,
     decoder: JSONDecoder = .init(),
-    urlSession: URLSessionProtocol = URLSession.shared,
+    urlSession: HTTPTransport = URLSession.shared,
     cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy,
     timeoutInterval: TimeInterval = 60,
     @RequestBuilder middleware: () -> RequestMiddleware = { identity }

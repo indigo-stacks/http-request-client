@@ -18,7 +18,7 @@ let package = Package(
   ],
   dependencies: [
     // Dependencies declare other packages that this package depends on.
-    .package(url: "https://github.com/indigo-ce/http-request-builder", from: "1.2.0"),
+    .package(url: "https://github.com/indigo-stacks/http-request-builder", from: "1.2.0"),
     .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.11.0"),
   ],
   targets: [

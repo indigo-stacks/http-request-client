@@ -1,5 +1,5 @@
 {
-  "originHash" : "2cc0321b3601c251be995a92a15730d3cf4496bf55b3dadeead383c736806f1b",
+  "originHash" : "46105b7219e2e9005f951db6175b950f7d72c20cb4c788df5acc2d0383a3ca4d",
   "pins" : [
     {
       "identity" : "combine-schedulers",
@@ -13,7 +13,7 @@
     {
       "identity" : "http-request-builder",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/indigo-ce/http-request-builder",
+      "location" : "https://github.com/indigo-stacks/http-request-builder",
       "state" : {
         "revision" : "b7b20a6c5b71790633fd80c4b895f8125951e0ef",
         "version" : "1.2.0"
